@@ -25,27 +25,7 @@ function resolvePromise(promise, res, resolve, reject) {
         resolve(res); 
     }
 }    
-/*** 1. 是个构造函数 
- * * 2. 传⼊⼀个可执⾏函数 函数的⼊参第⼀个为 fullFill函数 第⼆个为 reject函数； 函数⽴即执⾏ 
- * * 3. 状态⼀旦更改就不可以变更 只能 pending => fulfilled 或者 pending => rejected 
- * * 4. then 的时候要处理⼊参的情况 successCallback 和failCallback 均可能为⾮函数 
- * *    默认的 failCallback ⼀定要将异常抛出， 这样下⼀个promise便可将其捕获 异常冒泡的⽬的 
- * * 5. then 中执⾏回调的时候要捕获异常 将其传给下⼀个promise 
- * *    如果promise状态未变更 则将回调⽅法添加到对应队列中 
- * *    如果promise状态已经变更 需要异步处理成功或者失败回调 
- * *    因为可能出现 回调结果和当前then返回的Promise⼀致 从⽽导致死循环问题 
- * * 6. catch只是then的⼀种特殊的写法 ⽅便理解和使⽤ 
- * * 7. finally 特点 1. 不过resolve或者reject都会执⾏
- * *                 2. 回调没有参数 
- * *                 3. 返回⼀个Promise 且值可以穿透到下⼀个then或者catch
- * * 8. Promise.resolve, Promise.reject 根据其参数返回对应的值 或者状态的Promise即可 
- * * 9. Proise.all 特点 1. 返回⼀个Promise 
- * *                   2. ⼊参是数组 resolve的情况下出参也是数组 且结果顺序和调⽤顺序⼀致 
- * *                   3. 所有的值或者promise都完成才能resolve 所有要计数 
- * *                   4. 只要有⼀个为reject 返回的Promise便reject 
- * * 10. Proise.race 特点 1. 返回⼀个Promise 
- * *                      2. ⼊参是数组 那么出参根据第⼀个成功或者失败的参数来确定 
- * *                     3. 只要有⼀个resolve 或者reject 便更改返回Promise的状态 ***/
+
 class myPromise{
     status = PENDING;
     value = undefined;
@@ -59,8 +39,8 @@ class myPromise{
     constructor(executor){
         try {
             executor(
-                (value)=>asyncExecFun(()=>this.resolve(value))
-                (value)=>asyncExecFun(()=>this.reject(reason))
+                (value)=>asyncExecFun(()=>this.resolve(value)),
+                (reason)=>asyncExecFun(()=>this.reject(reason))
             )
         } catch (e) {
             this.reject(e)
