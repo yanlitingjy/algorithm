@@ -29,8 +29,7 @@ function debounce(func, wait, immediate) {
             if (callNow) {
                 func.apply(context, args)
             }
-        }
-        else {
+        }else {
             timeout = setTimeout(function () {
                 func.apply(context, args)
             }, wait);

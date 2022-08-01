@@ -102,12 +102,18 @@ function clone(original) {
     return clone;
 }
 
-let person5 = clone(parent5);
-person5.friends.push("lucy");
-console.log(person5.getName()); // parent5
-console.log(person5.getFriends()); // ["p1", "p2", "p3"]
-console.log(person5.friends)
-// 缺点和原型式继承一样
+let person7 = clone(parent5);
+person7.friends.push("lucy");
+console.log(person7.getName()); // parent5
+console.log(person7.getFriends()); // ["p1", "p2", "p3", "lucy"]
+console.log(person7.friends)// ["p1", "p2", "p3", "lucy"]
+
+let person8 = clone(parent5);
+person8.friends.push("zzz");
+console.log(person8.getName()); // parent5
+console.log(person8.getFriends()); // ["p1", "p2", "p3", "lucy", "zzz"]
+console.log(person8.friends)// ["p1", "p2", "p3", "lucy", "zzz"]
+// 缺点和原型式继承一样(两个实例使用的是同一个原型对象，内存空间是共享的)
 
 // 6、寄生组合式继承
 // 借助解决普通对象的继承问题的Object.create 方法，在前面几种继承方式的优缺点基础上进行改造，这也是所有继承方式里面相对最优的继承方式

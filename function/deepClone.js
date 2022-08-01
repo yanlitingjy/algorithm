@@ -15,7 +15,7 @@ function shallowClone(obj) {
     if(!isObject(obj)) return false;
     let newObj = Array.isArray(obj)?[]:{}
     for(let key in obj) {
-        //断一个对象是否包含自定义属性而不是原型链上的属性
+        //判断一个对象是否包含自定义属性而不是原型链上的属性
         if(obj.hasOwnProperty(key)){
             newObj[key] = obj[key];
         }

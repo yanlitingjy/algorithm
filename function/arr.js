@@ -9,7 +9,7 @@ for (let index = 0; index < array.length; index++) {
 console.log(array);
 
 // 二分法寻找数组元素
-function search(target) {
+function search(array,target) {
     let start = 0;
     let end = array.length - 1;
     while (start <= end) {

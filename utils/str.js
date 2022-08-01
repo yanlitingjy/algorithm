@@ -1,3 +1,5 @@
+
+
 //如：字符串abccba，从前往后读是a-b-c-c-b-a；从后往前读也是a-b-c-c-b-a
 function reserve1(str){
     return str === str.split('').reverse().join('')
@@ -109,14 +111,13 @@ function changeFirstCharUpper(str){
     for(var i=1;i<arrFoo.length;i++){
         arrFoo[i] = arrFoo[i].charAt(0).toUpperCase()+arrFoo[i].substr(1,arrFoo[i].length-1)
     }
-    console.log(arrFoo)
     return arrFoo.join('')
 }
 
 var foo = "get-element-by-id"
 console.log(changeFirstCharUpper(foo))
 
-function serilizeUrl(url){
+function serializeUrl(url){
     if(url.indexOf('?')==-1){
         return;
     }
@@ -131,7 +132,7 @@ function serilizeUrl(url){
     return urlObject
 }
 // var url = 'http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e';
-// console.log(serilizeUrl(url))
+// console.log(serializeUrl(url))
 
 //数字转换成千分位 如：12,876,977.98
 function numFormat(number){
