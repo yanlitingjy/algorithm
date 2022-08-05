@@ -1,7 +1,7 @@
 /**
  * 防抖: n 秒后在执行该事件，若在 n 秒内被重复触发，则重新计时
  */
-function debounce(fn,delay) {
+function debounce(fn,delay=500) {
     // 定义一个定时器,保存上一次的定时器
     let timer = null
     return function(...args) {
@@ -14,19 +14,23 @@ function debounce(fn,delay) {
     }
 }
 // 如果需要立即执行的话
-function debounce1(fn,delay,isImmediate) {
+function debounce1(fn,delay=500,isImmediate=false) {
     let timer = null
-    let isInvoke = false
+    let flag = true
     return function(...args) {
         if(timer) clearTimeout(timer)
         // 判断是否需要立即执行
-        if(isImmediate && !isInvoke){
-            fn.apply(this,args)
-            isInvoke = true
+        if(isImmediate){
+            if(flag){
+                fn.apply(context,args)
+                flag = false
+            }
+            timer = setTimeout(()=>{
+                flag = true
+            },wait)
         }else{ // 延迟执行
             timer = setTimeout(()=>{
                 fn.apply(this,args)
-                isInvoke = false
             },delay)
         }
     }
@@ -37,31 +41,27 @@ function debounce1(fn,delay,isImmediate) {
 function throttled(fn, delay = 500) {
     let timer = null
     return function (...args) {
-        if (!timer) {
-            timer = setTimeout(() => {
-                fn.apply(this, args)
-                timer = null
-            }, delay);
-        }
+        let context = this
+        if (timer) return;
+        timer = setTimeout(() => {
+            fn.apply(context, args)
+            timer = null
+        }, delay);
     }
 }
 
 // 通过参数控制是否立即执行
-const throttle2 = (fn, delay, isImmediate) => {
-    let timer = null
-    let isInvoke = false
+const throttle2 = (fn, delay=500, isImmediate=false) => {
+    let flag = true
     return function(...args) {
-        if (timer) return;
-        if (isImmediate && !isInvoke ) {
-            fn.apply(this, args);
-            timer = setTimeout(() => {
-                isInvoke = false;
-            }, delay);
-        } else {
-            timer = setTimeout(() => {
-                fn.apply(this, args);
-                isInvoke = false;
-            }, delay);
+        let context = this
+        if(flag){
+            flag = false
+            isImmediate && fn.apply(context,args)
+            setTimeout(() => {
+                !isImmediate && fn.apply(context,args)
+                flag = true
+            },delay)
         }
     }
 }

@@ -41,7 +41,10 @@ function deepClone(obj){
         
     }
 }
-// 循环递归
+// 循环递归 
+// 利用 WeakMap 类型作为 Hash 表，因为 WeakMap 是弱引用类型，可以有效防止内存泄漏）
+// 如果存在循环，则引用直接返回 WeakMap 存储的值。（判断一个对象的字段是否引用了这个对象或这个对象的任意父级）
+
 function deepClone(obj, hash = new WeakMap()) {
     if (obj === null) return obj; // 如果是null或者undefined我就不进行拷贝操作
     if (obj instanceof Date) return new Date(obj);
@@ -50,14 +53,17 @@ function deepClone(obj, hash = new WeakMap()) {
     if (typeof obj !== "object") return obj;
     // 是对象的话就要进行深拷贝
     if (hash.get(obj)) return hash.get(obj);
-    let cloneObj = new obj().constructor();
-    // 找到的是所属类原型上的constructor,而原型上的 constructor指向的是当前类本身
+    let cloneObj = Object.create(Object.getPrototypeOf(obj))
     hash.set(obj, cloneObj);
     for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        // 实现一个递归拷贝
-        cloneObj[key] = deepClone(obj[key], hash);
-      }
+    //for (let key of Reflect.ownKeys(obj)) {  // 能够遍历对象的不可枚举属性以及 Symbol 类型
+        if (obj.hasOwnProperty(key)) {
+            if(isObject(obj[key])){
+                cloneObj[key] = deepClone(obj[key],hash)
+            }else{
+                cloneObj[key] = obj[key]
+            }
+        }
     }
     return cloneObj;
   }
