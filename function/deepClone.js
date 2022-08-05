@@ -53,11 +53,12 @@ function deepClone(obj, hash = new WeakMap()) {
     if (typeof obj !== "object") return obj;
     // 是对象的话就要进行深拷贝
     if (hash.get(obj)) return hash.get(obj);
+    // Object.getPrototypeOf 返回指定对象的原型（内部[[Prototype]]属性的值）
     let cloneObj = Object.create(Object.getPrototypeOf(obj))
     hash.set(obj, cloneObj);
     for (let key in obj) {
     //for (let key of Reflect.ownKeys(obj)) {  // 能够遍历对象的不可枚举属性以及 Symbol 类型
-        if (obj.hasOwnProperty(key)) {
+        if (obj.hasOwnProperty(key)) {  //hasOwnProperty 作用是在一个对象里面找是否有某个属性或对象， 但是不会在它的原型中找， 返回boolean类型 
             if(isObject(obj[key])){
                 cloneObj[key] = deepClone(obj[key],hash)
             }else{
