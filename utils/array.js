@@ -1,6 +1,6 @@
 //es6方法过滤掉两个数组中对象id值相等的项
 function filterSameId(arr1,arr2){
-    arr1.filter(item=> !arr2.some(ele =>ele.id == item.id))
+    return arr1.filter(item=> !arr2.find(ele =>ele.id == item.id))
 }
 
 //数组去重

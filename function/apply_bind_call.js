@@ -39,7 +39,7 @@ function myCall(context, ...args){
  */
 function myBind(context,...bindArgs){
     // this为调用myBind的函数。将this赋值给变量_this
-    let _this = this;
+    let _this = this; //当前的函数本身
     // 返回函数fn
     return function fn(...args){
     	//拼接参数
