@@ -8,6 +8,7 @@ for (let index = 0; index < array.length; index++) {
 }
 console.log(array);
 
+
 // 二分法寻找数组元素
 function search(array,target) {
     let start = 0;
@@ -28,7 +29,16 @@ function search(array,target) {
 // 九九乘法表
 for (let i = 1; i <= 9; i++) {
     for (let j = 1; j <= i; j++) {
-        document.write(j + " * " + i + "=" + j * i + ",  ");
+        console.log(j + " * " + i + "=" + j * i + ",  ");
     }
-    document.write("</br>");
+    console.log("</br>");
 }
+
+// 过滤出null undefined 然后将剩下的 * 2，最后求和，用到filter，map，reduce
+
+let arr = [1,2,3,null,undefined]
+let sum = 
+    arr.filter(item=>item !== null && item !== undefined)
+    .map(item=>item*2)
+    .reduce((prev,cur)=> prev + cur,0)
+console.log(sum)

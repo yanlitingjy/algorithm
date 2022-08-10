@@ -16,21 +16,15 @@ function debounce(fn,delay=500) {
 // 如果需要立即执行的话
 function debounce1(fn,delay=500,isImmediate=false) {
     let timer = null
-    let flag = true
     return function(...args) {
+        let context = this
         if(timer) clearTimeout(timer)
         // 判断是否需要立即执行
         if(isImmediate){
-            if(flag){
-                fn.apply(context,args)
-                flag = false
-            }
-            timer = setTimeout(()=>{
-                flag = true
-            },wait)
+            fn.apply(context,args)
         }else{ // 延迟执行
             timer = setTimeout(()=>{
-                fn.apply(this,args)
+                fn.apply(context,args)
             },delay)
         }
     }

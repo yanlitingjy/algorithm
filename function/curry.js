@@ -5,7 +5,6 @@
  */
 function curry(fn){
     const fnArgsLength = fn.length // 传入函数的参数长度
-    console.log(fnArgsLength)
     let args = []
     function calc(...newArgs){
         args = [
