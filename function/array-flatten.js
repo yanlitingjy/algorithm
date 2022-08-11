@@ -48,7 +48,7 @@ function flatten2(arr){
     const res = []
     arr.foEach(item=>{
         if(Array.isArray(item)) {
-            const flatItem = flatten3(item)
+            const flatItem = flattenDeep(item)
             flatItem.forEach((n=>res.push(n)))
         }else {
             res.push(item)
