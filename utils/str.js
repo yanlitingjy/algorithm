@@ -1,19 +1,22 @@
 
 
 //如：字符串abccba，从前往后读是a-b-c-c-b-a；从后往前读也是a-b-c-c-b-a
-function reserve1(str){
+function reverse1(str){
     return str === str.split('').reverse().join('')
 }
 
-function reserve2(str){
-    var len = str.length;
-    for(var i=0;i<len-1;i++){
-        if(str.charAt(i)==str.charAt(len-1-i)){  //charAt字符在字符串中的下标
-            return true;
+function reverse2(str){
+    let len = str.length;
+    let middle = Math.floor(len / 2)
+    let flag = false
+    for(let i=0;i<middle;i++){
+        if(str.charAt(i) === str.charAt(len-1-i)){
+            flag = true
         }else{
-            return false;
+            flag = false
         }
     }
+    return flag;
 }
 
 //递归尾阶乘

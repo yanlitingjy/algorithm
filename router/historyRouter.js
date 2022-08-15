@@ -76,3 +76,18 @@ export default class VueRouter{
         })
     }
 }
+
+let obj = {
+    a:()=>{
+        console.log(this)
+    }, 
+    b:function(){
+        console.log(this)
+    }
+}
+console.log(obj.a())
+console.log(obj.b())
+c = obj.a
+d = obj.b
+c()
+d()

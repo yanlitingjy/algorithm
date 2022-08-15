@@ -61,11 +61,16 @@ export default class VueRouter {
                         href: '#' + this.to,
                     },
                     // 注册事件
-                    //   on: {
-                    //     click: this.clickHandler // 点击事件
-                    //   },
+                    on: {
+                    click: this.clickHandler // 点击事件
+                    },
                 }, [this.$slots.default]) // this.$slot.default 默认插槽
             },
+            methods:{
+                clickHandler(){
+                    this.$router.data.current = this.to
+                }
+            }
         });
         // router-view 组件
         const self = this; //这里的 this 指向 vueRouter 实例
