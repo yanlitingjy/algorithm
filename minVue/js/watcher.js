@@ -1,3 +1,7 @@
+// 实现一个订阅者 Watcher
+// Watcher 订阅者是 Observer 和 Compile 之间通信的桥梁
+// 主要的任务是订阅 Observer 中的属性值变化的消息，
+// 当收到属性值变化的消息时，触发解析器 Compile 中对应的更新函数。
 class Watcher{
     constructor(vm,key,cb){
         this.vm = vm

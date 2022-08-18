@@ -1,6 +1,6 @@
 class Vue{
     constructor(options){
-        //1 .通过属性保存选项的数据
+        //1、通过属性保存选项的数据
         this.$options = options || {}
         this.$data = options.data
         this.$el = typeof options.el === 'string'?document.querySelector(options.el) :options.el

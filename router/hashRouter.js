@@ -62,7 +62,7 @@ export default class VueRouter {
                     },
                     // 注册事件
                     on: {
-                    click: this.clickHandler // 点击事件
+                         click: this.clickHandler // 点击事件
                     },
                 }, [this.$slots.default]) // this.$slot.default 默认插槽
             },
