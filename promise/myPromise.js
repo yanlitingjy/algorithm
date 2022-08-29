@@ -147,8 +147,7 @@ class MyPromise {
         throw reason
       })
     })
-  } 
-  catch (failCallback) {
+  } catch (failCallback) {
     return this.then(undefined, failCallback)
   }
   static all(array) {
@@ -203,8 +202,8 @@ class MyPromise {
 }
 
 // 异步执⾏⽅法封装
-function asyncExecFun(fn) { 
-  setTimeout(() => fn(), 0); 
+function asyncExecFun(fn) {
+  setTimeout(() => fn(), 0);
 }
 
 function resolvePromise(promsie2, x, resolve, reject) {
