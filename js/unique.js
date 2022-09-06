@@ -1,3 +1,9 @@
+/**
+ * 数组对象根据字段去重
+ * @param {*} arr 要去重的数组
+ * @param {*} key 根据去重的字段名
+ * @returns 新数组
+ */
 function uniqueArrayObject(arr,key){
     if(arr.length === 0) return;
     let list = []
