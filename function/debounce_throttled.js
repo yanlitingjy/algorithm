@@ -33,13 +33,14 @@ function debounce1(fn,delay=500,isImmediate=false) {
  * 节流 n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效
  */
 function throttled(fn, delay = 500) {
-    let timer = null
+    let flag = true;
     return function (...args) {
         let context = this
-        if (timer) return;
+        if (!flag) return;
+        flag = false
         timer = setTimeout(() => {
             fn.apply(context, args)
-            timer = null
+            flag = true;
         }, delay);
     }
 }
