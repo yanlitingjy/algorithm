@@ -1,3 +1,12 @@
+// 实现数组push方法
+Array.prototype.push = function() {
+    for( let i = 0 ; i < arguments.length ; i++){
+        this[this.length] = arguments[i] ;
+    }
+    return this.length;
+}
+
+
 // 返回一个由回调函数组成的新数组
 function myMap(arr,fn){
     let res = []
