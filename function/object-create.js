@@ -35,3 +35,10 @@ Object.create =  function (paramProto,propertiesObject) {
 
 //上面代码中，最后返回了F的实例对象obj，那么也就是obj.__proto__ === F.prototype，
 //而F.prototype = paramProto，也就作到了obj.__proto__ === paramProto
+
+function objcet (obj) {
+    function F () {};
+    F.prototype = obj;
+    F.prototype.constructor = F;
+    return new F();
+}

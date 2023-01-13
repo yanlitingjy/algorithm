@@ -14,9 +14,11 @@ var s2 = new Child1();
 s1.play.push(4);
 console.log(s1.play, s2.play); // [1,2,3,4]
 // 存在问题  改变s1的play属性，会发现s2也跟着发生变化了 这是因为两个实例使用的是同一个原型对象，内存空间是共享的
+// 缺点 原型链继承中子类共享父类引用对象的问题
 
 
 // 2、构造函数继承（借助 call）
+// 原理 在子类构造函数内部使用call或apply来调用父类构造函数
 function Parent2(){
     this.name = 'parent1';
     this.play = [1, 2, 3]
@@ -60,7 +62,8 @@ s3.play.push(4);
 console.log(s3.play, s4.play);  // 不互相影响
 console.log(s3.getName()); // 正常输出'parent3'
 console.log(s4.getName()); // 正常输出'parent3'
-//方式一和方式二解决了，但是Parent3 执行了两次，造成了多构造一次的性能开销 
+//方式一和方式二解决了，但是Parent3 执行了两次，造成了多构造一次的性能开销
+// 父类构造函数会被调用两次
 
 // 4、原型式继承  主要借助Object.create方法实现普通对象的继承
 let parent4 = {
