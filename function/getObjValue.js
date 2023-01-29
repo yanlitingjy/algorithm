@@ -38,3 +38,6 @@ let obj1 = {
 console.log(get(obj1, 'obj1.a.0.b.c', -1)) // 3
 console.log(get(obj1, 'obj1.a.d.c', -1)) // -1
 console.log(get(obj1, 'obj1.a.b.c.f', -1)) // -1
+
+
+
