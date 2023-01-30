@@ -13,6 +13,7 @@ function debounce(fn,delay=500) {
         },delay)
     }
 }
+
 // 如果需要立即执行的话
 function debounce1(fn,delay=500,isImmediate=false) {
     let timer = null
@@ -36,12 +37,13 @@ function throttled(fn, delay = 500) {
     let flag = true;
     return function (...args) {
         let context = this
-        if (!flag) return;
-        flag = false
-        timer = setTimeout(() => {
-            fn.apply(context, args)
-            flag = true;
-        }, delay);
+        if(flag) {
+            flag = false
+            timer = setTimeout(() => {
+                fn.apply(context, args)
+                flag = true;
+            }, delay);
+        }
     }
 }
 

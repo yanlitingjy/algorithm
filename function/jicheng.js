@@ -14,7 +14,9 @@ var s2 = new Child1();
 s1.play.push(4);
 console.log(s1.play, s2.play); // [1,2,3,4]
 // 存在问题  改变s1的play属性，会发现s2也跟着发生变化了 这是因为两个实例使用的是同一个原型对象，内存空间是共享的
-// 缺点 原型链继承中子类共享父类引用对象的问题
+// 优点：继承了父类的模板，又继承了父类的原型对象
+// 缺点 1、原型对象的所有属性都被共享了，这样如果不小心修改了原型对象中的引用类型属性，那么所有子类创建的实例对象都会受到影响
+//      2、创建子类时，无法向父类构造函数传参数
 
 
 // 2、构造函数继承（借助 call）
@@ -35,8 +37,8 @@ let child2 = new Child2();
 console.log(child2);  // 没问题
 console.log(child2.getName());  // 会报错
 
-//存在问题  方式一已经解决
-//父类的引用属性不会被共享，但是只能继承父类的实例属性和方法，不能继承原型属性或者方法
+//优点：解决了原型链继承中子类实例共享父类引用对象的问题，实现多继承，创建子类实例时，可以向父类传递参数
+//缺点：只能继承父类的实例属性和方法，不能继承原型属性或者方法
 
 // 3、组合继承
 function Parent3(){
@@ -62,8 +64,11 @@ s3.play.push(4);
 console.log(s3.play, s4.play);  // 不互相影响
 console.log(s3.getName()); // 正常输出'parent3'
 console.log(s4.getName()); // 正常输出'parent3'
-//方式一和方式二解决了，但是Parent3 执行了两次，造成了多构造一次的性能开销
-// 父类构造函数会被调用两次
+
+//优点：1、可以继承父类实例属性和方法，也能够继承父类原型属性和方法
+// 2、弥补了原型链继承中引用属性共享的问题
+// 3、可传参，可复用
+// 缺点：父类构造函数会被调用两次
 
 // 4、原型式继承  主要借助Object.create方法实现普通对象的继承
 let parent4 = {
@@ -150,6 +155,19 @@ console.log(person6.getName()); // parent6
 console.log(person6.getFriends()); // child5
 
 
-//用到的继承
-// 1.ts接口的继承
-// 2、类的继承
+// ES6中的继承：
+
+// 主要是依赖extends关键字来实现继承，且继承的效果类似于寄生组合继承
+// 使用了extends实现继承不一定要constructor和super，因为没有的话会默认产生并调用它们
+// extends后面接着的目标不一定是class，只要是个有prototype属性的函数就可以了
+
+// super相关：
+// 在实现继承时，如果子类中有constructor函数，必须得在constructor中调用一下super函数，因为它就是用来产生实例this的。
+// super有两种调用方式：当成函数调用和当成对象来调用。
+// super当成函数调用时，代表父类的构造函数，且返回的是子类的实例，也就是此时super内部的this指向子类。在子类的constructor中super()就相当于是Parent.constructor.call(this)。
+// super当成对象调用时，普通函数中super对象指向父类的原型对象，静态函数中指向父类。且通过super调用父类的方法时，super会绑定子类的this，就相当于是Parent.prototype.fn.call(this)。
+
+// ES5继承和ES6继承的区别：
+
+// 在ES5中的继承(例如构造继承、寄生组合继承) ，实质上是先创造子类的实例对象this，然后再将父类的属性和方法添加到this上(使用的是Parent.call(this))。
+// 而在ES6中却不是这样的，它实质是先创造父类的实例对象this(也就是使用super())，然后再用子类的构造函数去修改this。

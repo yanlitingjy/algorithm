@@ -1,3 +1,7 @@
+console.log(null === null) // true
+console.log(undefined === undefined) // true
+console.log(NaN === NaN) // false
+
 console.log( 88 + NaN); // NaN
 console.log( Infinity + Infinity); // Infinity
 console.log( -Infinity + -Infinity); // -Infinity

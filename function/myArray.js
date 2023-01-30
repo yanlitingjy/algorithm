@@ -1,4 +1,5 @@
 // 实现数组push方法
+// push方法：1、将一个或者多个元素添加到数组的末尾；2、返回该数组的最新的长度
 Array.prototype.push = function() {
     for( let i = 0 ; i < arguments.length ; i++){
         this[this.length] = arguments[i] ;

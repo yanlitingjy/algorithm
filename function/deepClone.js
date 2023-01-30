@@ -23,7 +23,7 @@ function shallowClone(obj) {
     return newObj;
 }
 /**
- * 深拷贝  JSON.stringify()  JSON.parse()  会忽略undefined、symbol和函数
+ * 深拷贝  会忽略undefined、symbol和函数
  * @param {*} obj 
  * @returns 
  */
