@@ -23,7 +23,7 @@ let result = myMap(arr,(value)=>{
 })
 console.log(result) // [ 45, 92, 58, 17, 41, 24 ]
 
-// 过滤函数中返回true的数组元素放在心的数组中返回
+// 过滤函数中返回true的数组元素放在新的数组中返回
 function myFilter(arr,fn){
     let res = [];
     for(let i=0;i<arr.length;i++){

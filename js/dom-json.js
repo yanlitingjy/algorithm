@@ -1,5 +1,8 @@
-// dom To JSON
-// 将真实dom转化为虚拟dom
+/**
+ * 将真实dom转化为虚拟dom (dom To JSON)
+ * @param {*} dom 
+ * @returns  obj
+ */
 function dom2Json(dom) {
     if (!dom.tagName) return;
     let obj = {};

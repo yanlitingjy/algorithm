@@ -56,7 +56,11 @@ let node = {
         "name": "微生物"
     }]
 }
-
+/**
+ * 数转化成dom
+ * @param {*} node 
+ * @returns 
+ */
 function treesArr(node){
     let queue = [node]
     let data = [] //返回的数据结构

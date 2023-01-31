@@ -13,7 +13,11 @@ let data = [
     { id: 11, parentId: 5, name: '蟒蛇' },
     { id: 12, parentId: 5, name: '麻雀' }
 ]
-
+/**
+ * dom 转 tree
+ * @param {*} data 数组
+ * @returns 
+ */
 function transTree(data){
     let map = {}   // {0:{id: 0, parentId: null, name: '生物',children:[]},1:{id: 1, parentId: 0, name: '动物',children:[]}...}
     let treeList = []
@@ -26,7 +30,7 @@ function transTree(data){
         }
         map[item.id] = item
     })
-    //return map;
+
     data.forEach(item=>{
         if(map[item.parentId]){
             map[item.parentId].children.push(item)

@@ -13,7 +13,7 @@
  */
 function flatten1(arr){
     const res = []
-    arr.foEach(item=>{
+    arr.forEach(item=>{
         if(Array.isArray(item)) {
             item.forEach(n=>res.push(n))
         }else {
@@ -29,7 +29,7 @@ function flatten1(arr){
  */
 function flatten2(arr){
     const res = []
-    arr.foEach(item=>{
+    arr.forEach(item=>{
         res = res.concat(item)
     })
     return res;
@@ -46,7 +46,7 @@ function flatten2(arr){
  */
  function flattenDeep(arr){
     const res = []
-    arr.foEach(item=>{
+    arr.forEach(item=>{
         if(Array.isArray(item)) {
             const flatItem = flattenDeep(item)
             flatItem.forEach((n=>res.push(n)))
@@ -63,7 +63,7 @@ function flatten2(arr){
  */
  function flattenDeep2(arr){
     let res = []
-    arr.foEach(item=>{
+    arr.forEach(item=>{
         if(Array.isArray(item)) {
             const flatItem = flattenDeep2(item)
             res = res.concat(flatItem)

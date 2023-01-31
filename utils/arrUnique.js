@@ -28,10 +28,22 @@ const responseList = [
     { id: 3, name: '张麻子' },
 ]
 
-let arr = uniqueArrayObject(responseList, 'id')
-console.log(arr)
+// let arr = uniqueArrayObject(responseList, 'id')
+// console.log(arr)
 
 let arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+
+//数组去重
+function unique(arr) {
+    let newArr = []
+    arr.forEach(val=>{
+        if(newArr.indexOf(val) === -1){
+            newArr.push(val)
+        }
+    })
+    return newArr;
+}
+
 //利用filter
 function unique1(arr) {
     return arr.filter(function(item, index, arr) {

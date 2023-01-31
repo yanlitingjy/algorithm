@@ -1,5 +1,3 @@
-
-
 //如：字符串abccba，从前往后读是a-b-c-c-b-a；从后往前读也是a-b-c-c-b-a
 function reverse1(str){
     return str === str.split('').reverse().join('')

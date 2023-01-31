@@ -7,7 +7,7 @@ function mySetInterval(fn, t) {
         fn();
         timer = setTimeout(interval, t);
     }
-    interval();
+    setTimeout(interval, t);
     return {
         // cancel用来清除定时器
         cancel() {
