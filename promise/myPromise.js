@@ -76,7 +76,7 @@ class MyPromise {
     failCallback = failCallback ? failCallback : reason => {
       throw reason
     };
-    let promsie2 = new MyPromise((resolve, reject) => {
+    let promise2 = new MyPromise((resolve, reject) => {
       // 判断状态
       if (this.status === FULFILLED) {
         setTimeout(() => {
@@ -84,9 +84,9 @@ class MyPromise {
             let x = successCallback(this.value);
             // 判断 x 的值是普通值还是promise对象
             // 如果是普通值 直接调用resolve 
-            // 如果是promise对象 查看promsie对象返回的结果 
+            // 如果是promise对象 查看promise对象返回的结果 
             // 再根据promise对象返回的结果 决定调用resolve 还是调用reject
-            resolvePromise(promsie2, x, resolve, reject)
+            resolvePromise(promise2, x, resolve, reject)
           } catch (e) {
             reject(e);
           }
@@ -97,9 +97,9 @@ class MyPromise {
             let x = failCallback(this.reason);
             // 判断 x 的值是普通值还是promise对象
             // 如果是普通值 直接调用resolve 
-            // 如果是promise对象 查看promsie对象返回的结果 
+            // 如果是promise对象 查看promise对象返回的结果 
             // 再根据promise对象返回的结果 决定调用resolve 还是调用reject
-            resolvePromise(promsie2, x, resolve, reject)
+            resolvePromise(promise2, x, resolve, reject)
           } catch (e) {
             reject(e);
           }
@@ -113,9 +113,9 @@ class MyPromise {
               let x = successCallback(this.value);
               // 判断 x 的值是普通值还是promise对象
               // 如果是普通值 直接调用resolve 
-              // 如果是promise对象 查看promsie对象返回的结果 
+              // 如果是promise对象 查看promise对象返回的结果 
               // 再根据promise对象返回的结果 决定调用resolve 还是调用reject
-              resolvePromise(promsie2, x, resolve, reject)
+              resolvePromise(promise2, x, resolve, reject)
             } catch (e) {
               reject(e);
             }
@@ -127,9 +127,9 @@ class MyPromise {
               let x = failCallback(this.reason);
               // 判断 x 的值是普通值还是promise对象
               // 如果是普通值 直接调用resolve 
-              // 如果是promise对象 查看promsie对象返回的结果 
+              // 如果是promise对象 查看promise对象返回的结果 
               // 再根据promise对象返回的结果 决定调用resolve 还是调用reject
-              resolvePromise(promsie2, x, resolve, reject)
+              resolvePromise(promise2, x, resolve, reject)
             } catch (e) {
               reject(e);
             }
@@ -137,18 +137,20 @@ class MyPromise {
         });
       }
     });
-    return promsie2;
+    return promise2;
   }
   finally(callback) {
-    return this.then(value => {
-      return MyPromise.resolve(callback()).then(() => value);
-    }, reason => {
-      return MyPromise.resolve(callback()).then(() => {
-        throw reason
+    try{
+      return this.then(value => {
+        return MyPromise.resolve(callback()).then(() => value);
+      }, reason => {
+        return MyPromise.resolve(callback()).then(() => {
+          throw reason
+        })
       })
-    })
-  } catch (failCallback) {
-    return this.then(undefined, failCallback)
+    }catch (failCallback) {
+      return this.then(undefined, failCallback)
+    }
   }
   static all(array) {
     // 存储结果 
@@ -206,8 +208,8 @@ function asyncExecFun(fn) {
   setTimeout(() => fn(), 0);
 }
 
-function resolvePromise(promsie2, x, resolve, reject) {
-  if (promsie2 === x) {
+function resolvePromise(promise2, x, resolve, reject) {
+  if (promise2 === x) {
     return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
   }
   if (x instanceof MyPromise) {

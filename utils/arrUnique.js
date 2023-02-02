@@ -28,10 +28,10 @@ const responseList = [
     { id: 3, name: '张麻子' },
 ]
 
-// let arr = uniqueArrayObject(responseList, 'id')
-// console.log(arr)
+let arr = uniqueArrayObject(responseList, 'name')
+console.log(arr)
 
-let arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+//let arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
 
 //数组去重
 function unique(arr) {

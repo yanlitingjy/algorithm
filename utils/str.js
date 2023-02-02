@@ -74,7 +74,7 @@ function findMaxProfit2(arr){
 }
 console.log(findMaxProfit2(arr2))
 
-//实现一个算法，随机生成指制定长度的字符窜 比如给定 长度 8 输出 4ldkfg9j
+//实现一个算法，随机生成指定长度的字符窜 比如给定 长度 8 输出 4ldkfg9j
 function randomString(n){
     let str = 'abcdefghijklmnopqrstuvwxyz9876543210';
     let temp = '';

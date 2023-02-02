@@ -57,12 +57,13 @@ let node = {
     }]
 }
 /**
- * 数转化成dom
+ * 树转化为dom
  * @param {*} node 
  * @returns 
  */
 function treesArr(node){
     let queue = [node]
+    console.log(queue)
     let data = [] //返回的数据结构
     while(queue.length !== 0){
         let item = queue.shift()

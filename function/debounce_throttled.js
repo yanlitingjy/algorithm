@@ -19,29 +19,28 @@ function debounce1(fn,delay=500,isImmediate=false) {
     let timer = null
     return function(...args) {
         let context = this
-        if(timer) clearTimeout(timer)
+        timer && clearTimeout(timer)
         // 判断是否需要立即执行
-        if(isImmediate){
+        if(isImmediate && !timer){
             fn.apply(context,args)
-        }else{ // 延迟执行
-            timer = setTimeout(()=>{
-                fn.apply(context,args)
-            },delay)
         }
+        timer = setTimeout(()=>{
+            fn.apply(context,args)
+        },delay)
+        
     }
 }
 /**
  * 节流 n 秒内只运行一次，若在 n 秒内重复触发，只有一次生效
  */
 function throttled(fn, delay = 500) {
-    let flag = true;
+    let timer = null;
     return function (...args) {
         let context = this
-        if(flag) {
-            flag = false
+        if(!timer) {
             timer = setTimeout(() => {
                 fn.apply(context, args)
-                flag = true;
+                timer = null;
             }, delay);
         }
     }
@@ -49,15 +48,17 @@ function throttled(fn, delay = 500) {
 
 // 通过参数控制是否立即执行
 const throttle2 = (fn, delay=500, isImmediate=false) => {
-    let flag = true
+    let timer = null;
     return function(...args) {
         let context = this
-        if(flag){
-            flag = false
-            isImmediate && fn.apply(context,args)
-            setTimeout(() => {
-                !isImmediate && fn.apply(context,args)
-                flag = true
+        if(isImmediate) {
+            fn.apply(context,args)
+            isImmediate = false
+        }
+        if(!timer){
+            timer = setTimeout(() => {
+                fn.apply(context,args)
+                timer = null
             },delay)
         }
     }

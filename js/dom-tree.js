@@ -14,7 +14,7 @@ let data = [
     { id: 12, parentId: 5, name: '麻雀' }
 ]
 /**
- * dom 转 tree
+ * arr 转 tree
  * @param {*} data 数组
  * @returns 
  */
