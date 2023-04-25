@@ -24,3 +24,5 @@ function food(name,color,size) {
 }
 var apple = new food('redApple', 'RED', 'small');
 console.log(apple instanceof food); //true
+
+

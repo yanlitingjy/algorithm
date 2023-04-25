@@ -28,3 +28,4 @@ Person.prototype.say = function () {
 let p = myNew(Person, "huihui", 123)
 console.log(p) // Person {name: "huihui", age: 123}
 p.say() 
+

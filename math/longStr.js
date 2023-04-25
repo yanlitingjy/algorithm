@@ -12,7 +12,7 @@ function lengthOfLIS(nums) {
     for (let i = 0; i < nums.length; i++) {
         // 当前项依次和之前的每一项进行比较，累加出当前项的最长递增子序列
         for (let j = 0; j < i; j++) {
-            if (nums[j] < nums[i]) {
+            if (nums[j] < nums[i]) {  // 1, 4, 3, 5, 2
                 // 比较当前项已有的最大值和之前项最大值，比如当比较到第三项[1,2,2]时，如第三项比第二项大，所以第三项的计算结果为[1,2,3]
                 dp[i] = Math.max(dp[i], dp[j] + 1);
             }
@@ -39,5 +39,13 @@ function findArrNode(dp, value, result, arr) {
 }
 
 // 测试
-console.log(lengthOfLIS([9, 1, 7, 10, 4, 8, 5, 2])); // [1, 4, 5]
-console.log(lengthOfLIS([1, 4, 3, 5, 2, 6, 0])); // [1, 3, 5, 6]
+// console.log(lengthOfLIS([9, 1, 7, 10, 4, 8, 5, 2])); // [1, 4, 5]
+// console.log(lengthOfLIS([1, 4, 3, 5, 2, 6, 0])); // [1, 3, 5, 6]
+
+console.log(lengthOfLIS([1, 4, 3, 5, 2]));
+
+//1 从左侧开始处理数字，且每个数字对应的默认最长子序列都是1。
+
+//2 从第二个数字a开始，在左侧所有小于a的数字的最长子序列长度中，取最大的长度+1，即为当前最长递增子序列的长度。
+
+//3 后续数字参考步骤2依次处理
